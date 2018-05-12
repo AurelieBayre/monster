@@ -17,20 +17,26 @@
       if (this.checkWin()) {
         return
       }
-     
-      const damageByMonster = this.calculateDamage(5, 12)
-      this.playerHealth -= damageByMonster
-      
-      this.checkWin()
+      this.monsterAttacks()
      },
      specialAttack: function() {
-
+       this.monsterHealth -= this.calculateDamage(10, 25)
+        if (this.checkWin()){
+          return
+        }
+      this.monsterAttacks()
      },
      heal: function(){
+       this.playerHealth += 10
+       this.monsterAttacks()
 
      },
      giveUp: function(){
 
+     },
+     monsterAttacks: function() {
+      this.playerHealth -= this.calculateDamage(5, 12)
+      this.checkWin()
      },
      calculateDamage: function(min, max){
        return Math.max(Math.floor(Math.random() * max) + 1, min)
