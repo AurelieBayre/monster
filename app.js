@@ -43,6 +43,9 @@
           isPlayer: true,
           text: `Player takes some time to heal her wounds.`
         })
+        if (this.checkWin()) {
+          return
+        }
         this.monsterAttacks()
        } 
      },
