@@ -12,23 +12,16 @@
        this.monsterHealth = 100
      },
      attack: function() {
-      let max = 10
-      let min = 3
-      let damage = Math.max(Math.floor(Math.random() * max) + 1, min)
-      this.monsterHealth -= damage
-      if (this.monsterHealth <= 0) {
-        alert('You won!')
-        this.gameIsRunning = false
+      const damageByHuman = this.calculateDamage(3, 10)
+      this.monsterHealth -= damageByHuman
+      if (this.checkWin()) {
         return
       }
-      max = 12
-      min = 5
-      damage = Math.max(Math.floor(Math.random() * max) + 1, min)
-      this.playerHealth -= damage
-      if (this.playerHealth <= 0) {
-        alert('You lost!')
-        this.gameIsRunning = false
-      }
+     
+      const damageByMonster = this.calculateDamage(5, 12)
+      this.playerHealth -= damageByMonster
+      
+      this.checkWin()
      },
      specialAttack: function() {
 
@@ -38,6 +31,28 @@
      },
      giveUp: function(){
 
+     },
+     calculateDamage: function(min, max){
+       return Math.max(Math.floor(Math.random() * max) + 1, min)
+
+     },
+     checkWin: function() {
+      if (this.monsterHealth <= 0) {
+        if (confirm('You won! New game?')) {
+          this.startGame()
+        }else {
+          this.gameIsRunning = false
+        }
+        return true
+      }else if (this.playerHealth <= 0) {
+        if (confirm('You lost! New game?')) {
+          this.startGame()
+        }else {
+          this.gameIsRunning = false
+        }
+        return true
+      }
+      return false
      }
    }
  })
