@@ -27,9 +27,10 @@
       this.monsterAttacks()
      },
      heal: function(){
-       this.playerHealth += 10
-       this.monsterAttacks()
-
+       if(this.playerHealth <= 90) {
+        this.playerHealth += 10
+        this.monsterAttacks()
+       } 
      },
      giveUp: function(){
 
